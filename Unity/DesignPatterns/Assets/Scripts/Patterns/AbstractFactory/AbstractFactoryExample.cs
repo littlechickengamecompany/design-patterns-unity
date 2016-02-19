@@ -10,8 +10,6 @@ namespace DesignPatterns.AbstractFactory {
 
         private void OnGUI() {
 
-            Type factoryType = gun.ProjectileFactory.GetType();
-
             GUILayout.BeginArea(new Rect(10, 10, 300, 1000));
 
             GUILayout.BeginHorizontal();
