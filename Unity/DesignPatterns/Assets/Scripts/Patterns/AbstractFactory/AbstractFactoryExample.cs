@@ -11,14 +11,12 @@ namespace DesignPatterns.AbstractFactory {
         private void OnGUI() {
 
             GUILayout.BeginArea(new Rect(10, 10, 300, 1000));
-
             GUILayout.BeginHorizontal();
 
             DrawProjectileFactoryButton<BulletFactory>();
             DrawProjectileFactoryButton<RocketFactory>();
 
             GUILayout.EndHorizontal();
-
             GUILayout.BeginHorizontal();
 
             if (GUILayout.Button("Shoot")) {
@@ -26,7 +24,6 @@ namespace DesignPatterns.AbstractFactory {
             }
 
             GUILayout.EndHorizontal();
-
             GUILayout.EndArea();
         }
 
@@ -37,7 +34,7 @@ namespace DesignPatterns.AbstractFactory {
             bool isCurrentType = currentFactoryType == thisFactoryType;
             GUI.color = isCurrentType ? Color.green : Color.white;
 
-            if (GUILayout.Button("Swap to " + thisFactoryType.Name)) {
+            if (GUILayout.Button(thisFactoryType.Name)) {
                 ProjectileFactory bulletFactory = new T();
                 gun.SetProjectileFactory(bulletFactory);
             }
