@@ -1,2 +1,6 @@
 Unity/DesignPatterns/Library/
 Unity/DesignPatterns/Temp/
+*.sln
+*.suo
+*.csproj
+Unity/DesignPatterns/obj/
