@@ -8,8 +8,11 @@ namespace DesignPatterns.AbstractFactory {
 
         [SerializeField] private Gun gun;
 
-        private void OnGUI() {
+        private void Awake() {
+            gun.SetProjectileFactory(new BulletFactory());
+        }
 
+        private void OnGUI() {
             GUILayout.BeginArea(new Rect(10, 10, 300, 1000));
             GUILayout.BeginHorizontal();
 

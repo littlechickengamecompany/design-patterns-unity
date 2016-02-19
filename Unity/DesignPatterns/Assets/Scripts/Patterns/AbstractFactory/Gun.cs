@@ -19,10 +19,6 @@ namespace DesignPatterns.AbstractFactory {
             shootEffect.transform.position = transform.position;
         }
 
-        private void Awake() {
-            SetProjectileFactory(new BulletFactory());
-        }
-
     }
 
 }
