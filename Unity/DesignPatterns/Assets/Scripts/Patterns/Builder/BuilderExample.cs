@@ -9,16 +9,15 @@ namespace DesignPatterns.Builder {
         private Builder builder;
 
         private void Awake() {
-            SetBuilder<CubeBuilder>();
+            SetBuilder<PopBuilder>();
         }
 
         private void OnGUI() {
             GUILayout.BeginArea(new Rect(10, 10, 300, 1000));
             GUILayout.BeginHorizontal();
 
-            DrawBuilderButton<CubeBuilder>();
-            DrawBuilderButton<UIBuilder>();
-            DrawBuilderButton<SoundBuilder>();
+            DrawBuilderButton<PopBuilder>();
+            DrawBuilderButton<FlatBuilder>();
 
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();

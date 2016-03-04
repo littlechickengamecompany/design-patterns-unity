@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DesignPatterns.Builder {
 
-    public class CubeBuilder : Builder {
+    public class PopBuilder : Builder {
 
         private List<GameObject> cubes = new List<GameObject>();
 
