@@ -10,12 +10,12 @@ namespace DesignPatterns.Builder {
 
         public override void GoBig(Vector3 position) {
             base.GoBig(position);
-            InstantiateCube(2.0f, position);
+            InstantiateCube(position, 2.0f, Color.red);
         }
 
         public override void GoSmall(Vector3 position) {
             base.GoSmall(position);
-            InstantiateCube(1.0f, position);
+            InstantiateCube(position, 1.0f, Color.blue);
         }
 
         public override void Clear() {
@@ -25,7 +25,7 @@ namespace DesignPatterns.Builder {
             cubes.Clear();
         }
 
-        private void InstantiateCube(float size, Vector3 position) {
+        private void InstantiateCube(Vector3 position, float size, Color color) {
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(position);
@@ -34,6 +34,9 @@ namespace DesignPatterns.Builder {
             cube.transform.position = worldPosition;
             cube.transform.localScale = Vector3.one * size;
             cube.transform.rotation = Quaternion.Euler(position.x, position.y, 0.0f);
+
+            Renderer renderer = cube.GetComponent<Renderer>();
+            renderer.material.color = color;
 
             cubes.Add(cube);
         }

@@ -13,12 +13,12 @@ namespace DesignPatterns.Builder {
 
         public override void GoBig(Vector3 position) {
             base.GoBig(position);
-            AddUIElement(position, true);
+            AddUIElement(position, 100.0f, Color.red);
         }
 
         public override void GoSmall(Vector3 position) {
             base.GoSmall(position);
-            AddUIElement(position, false);
+            AddUIElement(position, 50.0f, Color.blue);
         }
 
         public override void Clear() {
@@ -28,16 +28,15 @@ namespace DesignPatterns.Builder {
             uiElements.Clear();
         }
 
-        private void AddUIElement(Vector3 position, bool isBig) {
+        private void AddUIElement(Vector3 position, float size, Color color) {
             Canvas canvas = GetOrCreateCanvas();
 
             GameObject element = new GameObject("UIElement");
             element.transform.SetParent(canvas.transform);
 
             Image image = element.AddComponent<Image>();
-            image.color = new Color(255, 255, 255, .8f);
+            image.color = color;
 
-            float size = isBig ? 100.0f : 50.0f;
             RectTransform rectTransform = element.GetComponent<RectTransform>();
             rectTransform.position = position;
             rectTransform.sizeDelta = new Vector2(size, size);
