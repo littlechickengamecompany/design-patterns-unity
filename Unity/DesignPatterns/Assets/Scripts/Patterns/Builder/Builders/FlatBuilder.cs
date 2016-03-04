@@ -11,20 +11,24 @@ namespace DesignPatterns.Builder {
 
         private Canvas canvas;
 
-        public override void GoBig() {
-            AddUIElement(true);
+        public override void GoBig(Vector3 position) {
+            base.GoBig(position);
+            AddUIElement(position, true);
         }
 
-        public override void GoSmall() {
-            AddUIElement(false);
+        public override void GoSmall(Vector3 position) {
+            base.GoSmall(position);
+            AddUIElement(position, false);
         }
 
         public override void Clear() {
+            base.Clear();
+
             uiElements.ForEach(x => GameObject.Destroy(x));
             uiElements.Clear();
         }
 
-        private void AddUIElement(bool isBig){
+        private void AddUIElement(Vector3 position, bool isBig) {
             Canvas canvas = GetOrCreateCanvas();
 
             GameObject element = new GameObject("UIElement");
@@ -33,14 +37,12 @@ namespace DesignPatterns.Builder {
             Image image = element.AddComponent<Image>();
             image.color = new Color(255, 255, 255, .8f);
 
-            RectTransform rectTransform = element.GetComponent<RectTransform>();
-            rectTransform.position = new Vector3(Random.Range(0, canvas.pixelRect.width),
-                                                 Random.Range(0, canvas.pixelRect.height),
-                                                 0);
             float size = isBig ? 100.0f : 50.0f;
+            RectTransform rectTransform = element.GetComponent<RectTransform>();
+            rectTransform.position = position;
             rectTransform.sizeDelta = new Vector2(size, size);
 
-            rectTransform.rotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
+            rectTransform.rotation = Quaternion.Euler(0.0f, 0.0f, position.x + position.y);
 
             uiElements.Add(element);
         }
