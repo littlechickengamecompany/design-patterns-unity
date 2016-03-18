@@ -8,22 +8,17 @@ namespace DesignPatterns.Builder {
     public class FlatBuilder : Builder {
 
         private List<GameObject> uiElements = new List<GameObject>();
-
         private Canvas canvas;
 
-        public override void GoBig(Vector3 position) {
-            base.GoBig(position);
+        public override void PlaceSmallShape(Vector3 position) {
             AddUIElement(position, 100.0f, Color.red);
         }
 
-        public override void GoSmall(Vector3 position) {
-            base.GoSmall(position);
+        public override void PlaceBigShape(Vector3 position) {
             AddUIElement(position, 50.0f, Color.blue);
         }
 
-        public override void Clear() {
-            base.Clear();
-
+        public override void ClearShapes() {
             uiElements.ForEach(x => GameObject.Destroy(x));
             uiElements.Clear();
         }

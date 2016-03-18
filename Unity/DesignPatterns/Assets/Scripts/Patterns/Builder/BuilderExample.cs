@@ -10,8 +10,7 @@ namespace DesignPatterns.Builder {
         private Rect uiRect = new Rect(10, 10, 300, 100);
 
         private void Awake() {
-            builder = new PopBuilder();
-            builder.Load(new Data());
+            SetBuilder<PopBuilder>();
         }
 
         private void Update() {
@@ -29,7 +28,7 @@ namespace DesignPatterns.Builder {
             GUILayout.BeginHorizontal();
 
             if (GUILayout.Button("Clear")) {
-                builder.Clear();
+                builder.ClearShapes();
             }
 
             GUILayout.EndHorizontal();
@@ -39,13 +38,15 @@ namespace DesignPatterns.Builder {
         private void HandlePlacement() {
             Vector2 flippedMousePosition = Input.mousePosition;
             flippedMousePosition.y = Camera.main.pixelHeight - Input.mousePosition.y;
-            if (uiRect.Contains(flippedMousePosition)) { return; }
+
+            bool isMouseHoveringUI = uiRect.Contains(flippedMousePosition);
+            if (isMouseHoveringUI) { return; }
 
             if (Input.GetMouseButtonDown(0)) {
-                builder.GoSmall(Input.mousePosition);
+                builder.PlaceBigShape(Input.mousePosition);
             }
             if (Input.GetMouseButtonDown(1)) {
-                builder.GoBig(Input.mousePosition);
+                builder.PlaceSmallShape(Input.mousePosition);
             }
         }
 
@@ -59,17 +60,19 @@ namespace DesignPatterns.Builder {
             bool isPressed = GUILayout.Button(thisBuilderType.Name);
 
             if (isPressed) {
-                Builder previousBuilder = builder;
-                
-                builder = new T();
-                builder.Load(previousBuilder.Data);
-
-                previousBuilder.Clear();
+                SetBuilder<T>();
             }
 
             GUI.color = Color.white;
 
             return isPressed;
+        }
+
+        private void SetBuilder<T>() where T : Builder, new() {
+            if (builder != null) {
+                builder.ClearShapes();
+            }
+            builder = new T();
         }
 
     }

@@ -8,19 +8,15 @@ namespace DesignPatterns.Builder {
 
         private List<GameObject> cubes = new List<GameObject>();
 
-        public override void GoBig(Vector3 position) {
-            base.GoBig(position);
+        public override void PlaceSmallShape(Vector3 position) {
             InstantiateCube(position, 2.0f, Color.red);
         }
 
-        public override void GoSmall(Vector3 position) {
-            base.GoSmall(position);
+        public override void PlaceBigShape(Vector3 position) {
             InstantiateCube(position, 1.0f, Color.blue);
         }
 
-        public override void Clear() {
-            base.Clear();
-
+        public override void ClearShapes() {
             cubes.ForEach(x => GameObject.Destroy(x));
             cubes.Clear();
         }
